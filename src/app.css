@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'IBM Plex Mono';
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	}
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #00ff0020 #000;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #00ff0020;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #00ff0040;
+}
+
+/* CRT Glow effect */
+.crt-glow {
+	text-shadow: 0 0 2px currentColor, 0 0 4px currentColor;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+.animate-blink {
+	animation: blink 1s step-end infinite;
+}
