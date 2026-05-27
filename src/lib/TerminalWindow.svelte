@@ -37,40 +37,47 @@
 <div
     role="application"
     aria-label="Interactive terminal portfolio"
-    class="bg-gray-950 border border-green-500/30 rounded-lg shadow-2xl overflow-hidden max-w-2xl mx-auto my-8 md:my-10"
+    class="crt-screen crt-flicker bg-[#080808] border-2 border-[#00ff66]/30 rounded shadow-[0_0_20px_rgba(0,255,102,0.05)] overflow-hidden w-full mx-auto font-mono"
 >
-    <!-- Title bar -->
+    <!-- Vintage Terminal Title bar -->
     <div
-        class="flex items-center gap-2 px-4 py-2 bg-gray-900 border-b border-green-500/20"
+        class="flex items-center justify-between px-4 py-1.5 bg-[#0d0d0d] border-b border-[#00ff66]/25 select-none"
     >
-        <div class="flex gap-1.5">
-            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+        <span class="text-[11px] text-[#00ff66]/50">azzam-terminal-session-0</span>
+        <span class="text-[11px] text-[#00ff66]/80 font-bold tracking-wider">[ AZZAM-PORTFOLIO-OS v2.26 ]</span>
+        <div class="flex gap-3 text-[11px] text-[#00ff66]/40">
+            <span>[ _ ]</span>
+            <span>[ 🗖 ]</span>
+            <span class="text-red-500/70 hover:text-red-500 cursor-pointer">[ X ]</span>
         </div>
-        <span class="text-xs text-green-500/60 font-mono ml-2"
-            >visitor@portfolio:~</span
-        >
     </div>
 
     <!-- Output area -->
     <TerminalOutput {lines} />
 
     <!-- Input area -->
-    <div class="px-4 py-3 bg-gray-900 border-t border-green-500/20">
+    <div class="px-4 py-3 bg-[#070707] border-t border-[#00ff66]/20">
         <CommandInput onSubmit={handleCommandSubmit} {inputRef} />
     </div>
 
-    <!-- Quick command chips -->
+    <!-- Retro TUI Function keys bar -->
     <div
-        class="flex flex-wrap gap-2 px-4 py-2 bg-gray-950 border-t border-green-500/10"
+        class="flex flex-wrap gap-x-4 gap-y-2 justify-center px-4 py-2 bg-[#0c0c0c] border-t border-[#00ff66]/15 text-xs text-[#00ff66]/60"
     >
-        {#each ["banner", "about", "skills", "contact", "neofetch", "help"] as cmd}
+        {#each [
+            { key: "F1", name: "banner" },
+            { key: "F2", name: "about" },
+            { key: "F3", name: "skills" },
+            { key: "F4", name: "contact" },
+            { key: "F5", name: "neofetch" },
+            { key: "F6", name: "help" }
+        ] as { key, name }}
             <button
-                onclick={() => runCommand(cmd)}
-                class="text-xs font-mono text-green-500/70 hover:text-green-400 hover:bg-green-500/10 px-2 py-1 rounded transition-colors cursor-pointer"
+                onclick={() => runCommand(name)}
+                class="hover:text-[#00ff66] transition-colors cursor-pointer flex items-center select-none text-[11px]"
             >
-                {cmd}
+                <span class="bg-[#00ff66]/10 border border-[#00ff66]/30 px-1 py-0.5 rounded text-[#00ff66] text-[9px] font-bold mr-1.5">{key}</span>
+                <span>{name}</span>
             </button>
         {/each}
     </div>

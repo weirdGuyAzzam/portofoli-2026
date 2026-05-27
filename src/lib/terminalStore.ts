@@ -1,6 +1,6 @@
 import { derived, writable, type Writable } from "svelte/store";
 
-interface TerminalLine {
+export interface TerminalLine {
   type: "input" | "output" | "error" | "info" | "ascii";
   content: string;
 }
@@ -184,8 +184,9 @@ class TerminalStore {
   }
 
   async runInitialCommands() {
-    await commands.banner([]);
-    await commands.help([]);
+    const bannerLines = await commands.banner([]);
+    const helpLines = await commands.help([]);
+    this.addLines([...bannerLines, ...helpLines]);
   }
 }
 

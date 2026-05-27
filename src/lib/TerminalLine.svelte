@@ -9,22 +9,22 @@
 	const getClass = () => {
 		switch (type) {
 			case 'input':
-				return 'text-green-400';
+				return 'text-[#00ff66] phosphor-glow font-bold';
 			case 'error':
-				return 'text-red-400';
+				return 'text-[#ff3333] font-bold';
 			case 'ascii':
-				return 'text-green-300 font-bold';
+				return 'text-[#00dd55] leading-none';
 			case 'info':
-				return 'text-green-500';
+				return 'text-[#00b34a] font-semibold';
 			default:
-				return 'text-green-300';
+				return 'text-[#ececec]/90';
 		}
 	};
 
 	const getPrefix = () => {
 		switch (type) {
 			case 'input':
-				return '$ ';
+				return 'visitor@azzam-dev:~$ ';
 			default:
 				return '';
 		}
@@ -33,7 +33,7 @@
 
 <div class="flex items-start gap-2 mb-1">
 	{#if type === 'input'}
-		<span class="text-green-600 mt-0.5">{getPrefix()}</span>
+		<span class="text-[#00ff66]/60 font-bold mt-0.5">{getPrefix()}</span>
 		<span class="{getClass()} whitespace-pre-wrap">{content}</span>
 	{:else}
 		<span class="{getClass()} whitespace-pre-wrap">{content}</span>

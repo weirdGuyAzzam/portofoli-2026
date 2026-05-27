@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
 @layer base {
 	@font-face {
@@ -13,42 +12,76 @@
 
 * {
 	scrollbar-width: thin;
-	scrollbar-color: #00ff0020 #000;
+	scrollbar-color: rgba(0, 255, 102, 0.15) #050505;
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+	width: 6px;
+	height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-	background: #000;
+	background: #050505;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #00ff0020;
-	border-radius: 4px;
+	background: rgba(0, 255, 102, 0.2);
+	border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #00ff0040;
+	background: rgba(0, 255, 102, 0.4);
 }
 
-/* CRT Glow effect */
-.crt-glow {
-	text-shadow: 0 0 2px currentColor, 0 0 4px currentColor;
+/* CRT Screen Effects */
+.crt-screen {
+	position: relative;
+	overflow: hidden;
+	background: #060606;
+	border: 1px solid rgba(0, 255, 102, 0.15);
+	box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.95), 0 0 15px rgba(0, 255, 102, 0.03);
 }
 
-/* Blinking cursor animation */
-@keyframes blink {
+/* Phosphor green scanlines */
+.crt-screen::before {
+	content: " ";
+	display: block;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+	z-index: 20;
+	background-size: 100% 4px;
+	pointer-events: none;
+}
+
+/* Screen flicker animation */
+@keyframes crt-flicker {
+	0% { opacity: 0.99; }
+	50% { opacity: 1; }
+	100% { opacity: 0.995; }
+}
+
+.crt-flicker {
+	animation: crt-flicker 0.2s infinite;
+}
+
+/* Blinking box cursor animation */
+@keyframes block-blink {
 	0%, 100% {
-		opacity: 1;
+		background-color: #00ff66;
+		color: #000;
 	}
 	50% {
-		opacity: 0;
+		background-color: transparent;
+		color: #00ff66;
 	}
 }
 
-.animate-blink {
-	animation: blink 1s step-end infinite;
+.animate-block-blink {
+	animation: block-blink 1s step-end infinite;
+}
+
+/* Text glow */
+.phosphor-glow {
+	text-shadow: 0 0 1px rgba(0, 255, 102, 0.5), 0 0 5px rgba(0, 255, 102, 0.15);
 }
